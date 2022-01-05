@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class BashConfig(AppConfig):
+class MoscowRegionSiteConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'bash'
+    name = 'moscowregionsite'
