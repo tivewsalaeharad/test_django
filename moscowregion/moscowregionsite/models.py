@@ -14,7 +14,7 @@ class Locality(models.Model):
         default=LocalitySubordination.DISTRICT,
         verbose_name="Подчинение"
     )
-    name = models.CharField(max_length=100, verbose_name="Название")
+    name = models.CharField(max_length=100, verbose_name="Название", unique=True)
     url = models.URLField(max_length=255, verbose_name="Ссылка")
     unit = models.CharField(max_length=100, verbose_name="Административная единица")
     OKATO = models.CharField(max_length=50, verbose_name="ОКАТО")
@@ -23,9 +23,3 @@ class Locality(models.Model):
     city_status = models.CharField(default=None, blank=True, null=True, max_length=20, verbose_name="Статус города")
     category = models.CharField(blank=True, max_length=50, verbose_name="Категория")
 
-    @classmethod
-    def truncate(cls):
-        with connection.cursor() as cursor:
-            table_name = cls._meta.db_table
-            cursor.execute('DELETE FROM {}'.format(table_name))
-            cursor.execute('UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME=\'{}\''.format(table_name))

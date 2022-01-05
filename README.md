@@ -23,3 +23,9 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py parsecities
 ```
+
+Для запуска Web-приложения набрать:
+
+```shell
+python manage.py runserver
+```

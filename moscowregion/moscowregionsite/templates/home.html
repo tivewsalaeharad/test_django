@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+    <p>Введите название города:</p>
+    <input id="cityName" type="text" list="cities" Placeholder="Введите название города" class="form-control" style="width:300px;">
+    <datalist id="cities">
+ {% for results in showcity %}
+        <option data-id="{{results.id}}" value="{{results.name}}">
+ {% endfor %}
+    </datalist>
+    <hr>
+    <div>
+        <p id="selectedCityName"></p>
+        <p id="selectedCityPopulation"></p>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $("#cityName").change(function() {
+            var city_id = $('#cities option[value="' + $('#cityName').val() + '"]').data('id');
+            if (city_id) {
+                $.get('/api/localities/?id=' + city_id, function(data) {
+                    $('#selectedCityName').html('<a href="' + data.url + '" target="_blank">' + data.name + '</a>');
+                    $('#selectedCityPopulation').html('Население: ' + data.population + ' чел.');
+                });
+            }
+        }).change();
+    </script>
+{% endblock %}
