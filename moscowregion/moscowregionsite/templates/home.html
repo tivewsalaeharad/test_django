@@ -10,6 +10,7 @@
     </datalist>
     <hr>
     <div>
+        <p style="color: red" id="errorMessage"></p>
         <p id="selectedCityName"></p>
         <p id="selectedCityPopulation"></p>
     </div>
@@ -23,6 +24,11 @@
                 $.get('/api/localities/?id=' + city_id, function(data) {
                     $('#selectedCityName').html('<a href="' + data.url + '" target="_blank">' + data.name + '</a>');
                     $('#selectedCityPopulation').html('Население: ' + data.population + ' чел.');
+                    $('#errorMessage').empty();
+                }).fail(function() {
+                    $('#selectedCityName').empty();
+                    $('#selectedCityPopulation').empty();
+                    $('#errorMessage').html("Ошибка соединения с сервером");
                 });
             }
         }).change();

@@ -18,7 +18,7 @@ class Locality(models.Model):
     url = models.URLField(max_length=255, verbose_name="Ссылка")
     unit = models.CharField(max_length=100, verbose_name="Административная единица")
     OKATO = models.CharField(max_length=50, verbose_name="ОКАТО")
-    population = models.IntegerField(verbose_name="Население")
+    population = models.IntegerField(default=0, verbose_name="Население")
     founded = models.CharField(default=None, blank=True, null=True, max_length=20, verbose_name="Основан")
     city_status = models.CharField(default=None, blank=True, null=True, max_length=20, verbose_name="Статус города")
     category = models.CharField(blank=True, max_length=50, verbose_name="Категория")
